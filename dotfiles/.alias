@@ -1,0 +1,5 @@
+alias _="sudo"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
