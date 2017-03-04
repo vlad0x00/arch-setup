@@ -34,7 +34,4 @@ feh --bg-fill --randomize --recursive ~/wallpapers/* &
 
 xbindkeys &
 xcompmgr &
-
-export BROWSER=google-chrome-stable
-export TERMINAL=xfce4-terminal
 i3
