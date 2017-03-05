@@ -1,6 +1,8 @@
 #!/bin/bash
 
-pacman -S xorg-server xorg-server-devel xorg-utils xorg-server-utils xorg-xrandr xorg-xinput xbindkeys mesa i3 dmenu xcompmgr
+USER=schutzekatze
+
+pacman -S xorg-server xorg-server-devel xorg-utils xorg-server-utils xorg-xrandr xorg-xinput xbindkeys xbacklight mesa i3 dmenu xcompmgr
 
 echo -e "\nPress enter to continue"
 read
@@ -8,8 +10,8 @@ read
 #=============================================================
 
 pacman -S wpa_supplicant wpa_actiond
-ethernet_interface=$(ls /sys/class/net | grep en)
-wireless_interface=$(ls /sys/class/net | grep wl)
+ethernet_interface=$(ls /sys/class/net | grep -m 1 en)
+wireless_interface=$(ls /sys/class/net | grep -m 1 wl)
 systemctl enable netctl-auto@$wireless_interface
 
 echo -e "\nPress enter to continue"
@@ -19,15 +21,15 @@ read
 
 pacman -S qt5-base vlc pulseaudio chromium gedit eclipse-cpp geogebra htop iotop libreoffice-fresh jdk8-openjdk openjdk8-doc openjdk8-src \
 java-openjfx java-openjfx-doc java-openjfx-src gimp cowsay lolcat fortune-mod netbeans nmap openssh python php sl \
-transmission-qt tree wine xfce4-terminal shotwell feh php noto-fonts-cjk noto-fonts-emoji neovim
+transmission-qt tree wine xfce4-terminal shotwell feh php noto-fonts-cjk noto-fonts-emoji neovim feh nautilus conky
 
 echo -e "\nPress enter to continue"
 read
 
 #=============================================================
 
-useradd -m -s /bin/bash schutzekatze
-usermod -a -G wheel,audio,video schutzekatze
+useradd -m -s /bin/bash $USER
+usermod -a -G wheel,audio,video $USER
 cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/' | tee /etc/sudoers >/dev/null
 
 echo -e "\nPress enter to continue"
@@ -47,8 +49,9 @@ echo -e "\nPress enter to continue"
 read
 
 for dotfile in $(find . ! -type d); do
-    ln -sf $(pwd)/$dotfile /home/schutzekatze/$(dirname $dotfile)/
-    chown -h schutzekatze:schutzekatze /home/schutzekatze/$(dirname $dotfile)/$(basename $dotfile)
+    mkdir -p /home/$USER/$(dirname $dotfile)/
+    ln -sf $(pwd)/$dotfile /home/$USER/$(dirname $dotfile)/
+    chown -h $USER:$USER /home/$USER/$(dirname $dotfile)/$(basename $dotfile)
 done
 
 cd $wd
@@ -60,10 +63,10 @@ read
 
 wd=$(pwd)
 
-sudo -u schutzekatze wget https://aur.archlinux.org/cgit/aur.git/snapshot/yaourt.tar.gz && \
-sudo -u schutzekatze tar zxf yaourt.tar.gz && \
+sudo -u $USER wget https://aur.archlinux.org/cgit/aur.git/snapshot/yaourt.tar.gz && \
+sudo -u $USER tar zxf yaourt.tar.gz && \
 cd yaourt && \
-sudo -u schutzekatze makepkg -sri
+sudo -u $USER makepkg -sri
 
 cd $wd
 rm -rf yaourt && rm -rf yaourt.tar.gz
@@ -73,6 +76,6 @@ read
 
 #=============================================================
 
-sudo -u schutzekatze yaourt -S google-chrome ttf-google-fonts-git teamviewer
+sudo -u $USER yaourt -S google-chrome ttf-google-fonts-git teamviewer
 
 echo -e "\nAll done"
