@@ -2,7 +2,7 @@
 
 USER=schutzekatze
 
-pacman -S xorg-server xorg-server-devel xorg-utils xorg-server-utils xorg-xrandr xorg-xinput xbindkeys xbacklight mesa i3 dmenu xcompmgr
+pacman -S xorg-server xorg-server-devel xorg-utils xorg-server-utils xorg-xrandr xorg-xinput xbindkeys mesa dmenu xcompmgr
 
 echo -e "\nPress enter to continue"
 read
@@ -21,7 +21,7 @@ read
 
 pacman -S qt5-base vlc pulseaudio chromium gedit eclipse-cpp geogebra htop iotop libreoffice-fresh jdk8-openjdk openjdk8-doc openjdk8-src \
 java-openjfx java-openjfx-doc java-openjfx-src gimp cowsay lolcat fortune-mod netbeans nmap openssh python php sl \
-transmission-qt tree wine xfce4-terminal shotwell feh php noto-fonts-cjk noto-fonts-emoji neovim feh nautilus conky
+transmission-qt tree xfce4-terminal shotwell feh php noto-fonts-cjk noto-fonts-emoji neovim feh nautilus conky
 
 echo -e "\nPress enter to continue"
 read
@@ -30,7 +30,7 @@ read
 
 useradd -m -s /bin/bash $USER
 usermod -a -G wheel,audio,video $USER
-cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/' | tee /etc/sudoers >/dev/null
+#cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/' | tee /etc/sudoers >/dev/null
 
 echo -e "\nPress enter to continue"
 read
@@ -76,6 +76,6 @@ read
 
 #=============================================================
 
-sudo -u $USER yaourt -S google-chrome ttf-google-fonts-git teamviewer
+sudo -u $USER yaourt -S google-chrome ttf-google-fonts-git teamviewer i3-gaps
 
 echo -e "\nAll done"
