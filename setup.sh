@@ -60,8 +60,14 @@ echo "Installing yaourt apps"
 echo -e "\nPress enter to continue"
 read
 
+echo "Setting up password for $USERNAME"
+. step-passwd.sh
+
+echo -e "\nPress enter to continue"
+read
+
 echo "Deleting original dir"
 . step-delete-original.sh
 
 echo -e "\nAll done"
-echo -e "\nYou should now install graphics drivers, set password for $USERNAME, reboot, and enjoy."
+echo -e "\nYou should now install graphics drivers, reboot, and enjoy."
