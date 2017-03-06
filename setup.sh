@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Setting up environment variables"
-. env-setup.sh
+. step-env.sh
 
 echo -e "\nPress enter to continue"
 read
