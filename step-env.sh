@@ -1,4 +1,5 @@
-USERNAME=schutzekatze
+echo -n "Your username: "
+read USERNAME
 ETHERNET_INTERFACE=$(ls /sys/class/net | grep -m 1 en)
 WIRELESS_INTERFACE=$(ls /sys/class/net | grep -m 1 wl)
 ORIGINAL_DIR=$(pwd)
