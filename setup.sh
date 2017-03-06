@@ -18,12 +18,6 @@ echo "Setting up wifi"
 echo -e "\nPress enter to continue"
 read
 
-echo "Installing user apps"
-. step-user-apps.sh
-
-echo -e "\nPress enter to continue"
-read
-
 echo "Creating user"
 . step-create-user.sh
 
@@ -32,6 +26,12 @@ read
 
 echo "Moving to home"
 . step-move.sh
+
+echo -e "\nPress enter to continue"
+read
+
+echo "Installing user apps"
+. step-user-apps.sh
 
 echo -e "\nPress enter to continue"
 read
