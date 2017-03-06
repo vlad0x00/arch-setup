@@ -1,7 +1,6 @@
 #!/bin/bash
 
 wd=$(pwd)
-chown -R $USERNAME:$USERNAME $wd
 
 cd dotfiles
 

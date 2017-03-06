@@ -30,6 +30,12 @@ echo "Creating user"
 echo -e "\nPress enter to continue"
 read
 
+echo "Moving to home"
+. step-move.sh
+
+echo -e "\nPress enter to continue"
+read
+
 echo "Setting up dotfiles"
 . step-dotfiles.sh
 
@@ -50,6 +56,12 @@ read
 
 echo "Installing yaourt apps"
 . step-yaourt-apps.sh
+
+echo -e "\nPress enter to continue"
+read
+
+echo "Deleting original dir"
+. step-delete-original.sh
 
 echo -e "\nAll done"
 echo -e "\nYou should now install graphics drivers, set password for $USERNAME, reboot, and enjoy."
