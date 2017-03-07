@@ -26,5 +26,4 @@ BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 MiscCopyOnSelect=FALSE
 MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
-BackgroundDarkness=0.700000
-
+BackgroundDarkness=0.850000

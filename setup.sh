@@ -66,6 +66,12 @@ echo "Setting up password for $USERNAME"
 echo -e "\nPress enter to continue"
 read
 
+echo "Setting up power management"
+. step-power-management.sh
+
+echo -e "\nPress enter to continue"
+read
+
 echo "Deleting original dir"
 . step-delete-original.sh
 
