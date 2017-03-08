@@ -77,6 +77,14 @@
 "pactl set-sink-mute @DEFAULT_SINK toggle"
   XF86AudioMute
 
+#Increase brightness
+"xbacklight +15"
+  XF86MonBrightnessUp
+
+#Increase brightness
+"xbacklight -15"
+  XF86MonBrightnessDown
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
