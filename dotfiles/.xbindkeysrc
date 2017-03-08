@@ -85,6 +85,10 @@
 "xbacklight -15"
   XF86MonBrightnessDown
 
+#Take a screenshot
+"xfce4-screenshooter"
+  Print
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
