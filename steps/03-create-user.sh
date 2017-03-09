@@ -8,7 +8,7 @@ echo "$changed_sudoers" | tee /etc/sudoers >/dev/null
 id -u $USERNAME >/dev/null
 if [ $? -eq 0 ]; then
     echo "User $USERNAME already exists"
-    exit
+    return
 fi
 
 useradd -m -s /bin/bash $USERNAME

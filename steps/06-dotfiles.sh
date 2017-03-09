@@ -2,9 +2,11 @@
 
 echo "Setting up dotfiles"
 
-wd=$(pwd)
-
-cd ../dotfiles
+cd dotfiles
+if [ $? -ne 0 ]; then
+    echo "Could not open the dotfiles directory"
+    return
+fi
 
 fixed_i3status=$(cat .i3status.conf \
 | sed "s/wireless \([[:alnum:]]*\)/wireless $WIRELESS_INTERFACE/g" \
@@ -15,5 +17,3 @@ for dotfile in $(find . -type f); do
     sudo -u $USERNAME mkdir -p /home/$USERNAME/$(dirname $dotfile)/
     sudo -u $USERNAME ln -sf $(pwd)/$dotfile /home/$USERNAME/$(dirname $dotfile)/
 done
-
-cd $wd
