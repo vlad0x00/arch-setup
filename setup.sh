@@ -8,11 +8,11 @@ if [[ ! $ENVIRONMENT_SET ]]; then
 
     export ETHERNET_INTERFACE=$(ls /sys/class/net | grep -m 1 en)
     export WIRELESS_INTERFACE=$(ls /sys/class/net | grep -m 1 wl)
-    export SETUP_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-    
+
     export ENVIRONMENT_SET=true
 fi
 
+export SETUP_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 cd $SETUP_DIR
 
 SUCCESSFUL_STEPS_FILE=successful-steps
@@ -36,5 +36,5 @@ done
 
 rm -rf $SUCCESSFUL_STEPS_FILE
 
-echo -e "\nAll done"
-echo -e "\nYou should now install graphics drivers, reboot, and enjoy."
+echo "All done"
+echo "You should now install graphics drivers, reboot, and enjoy."

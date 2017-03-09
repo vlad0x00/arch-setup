@@ -3,7 +3,7 @@
 echo "Setting up dotfiles"
 
 cd dotfiles
-if [ $? -ne 0 ]; then
+if [[ $? -ne 0 ]]; then
     echo "Could not open the dotfiles directory"
     return
 fi
