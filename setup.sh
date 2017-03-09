@@ -1,79 +1,23 @@
 #!/bin/bash
 
-echo "Setting up environment variables"
-. steps/step-env.sh
+SUCCESSFUL_STEPS_FILE=successful-steps
 
-echo -e "\nPress enter to continue"
-read
+for step in $(find steps -type f | sort); do
+    if [ -f $SUCCESSFUL_STEPS_FILE ] && [ ! -z $(grep $step $SUCCESSFUL_STEPS_FILE) ]; then
+        continue
+    fi
 
-echo "Installing xorg"
-. steps/step-xorg.sh
+    . $step
 
-echo -e "\nPress enter to continue"
-read
+    echo -e "\nPress enter to continue"
+    echo "Cancel the setup (Crtl+C) if the last step was not successful"
+    echo "The setup will continue from the last unsuccessful step on restart"
+    read
 
-echo "Setting up wifi"
-. steps/step-wifi.sh
+    echo $step >>$SUCCESSFUL_STEPS_FILE
+done
 
-echo -e "\nPress enter to continue"
-read
-
-echo "Creating user"
-. steps/step-create-user.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Moving to home"
-. steps/step-move.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Installing user apps"
-. steps/step-user-apps.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Setting up dotfiles"
-. steps/step-dotfiles.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Setting up swapfile"
-. steps/step-swapfile.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Installing yaourt"
-. steps/step-yaourt.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Installing yaourt apps"
-. steps/step-yaourt-apps.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Setting up password for $USERNAME"
-. steps/step-passwd.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Setting up power management"
-. steps/step-power-management.sh
-
-echo -e "\nPress enter to continue"
-read
-
-echo "Deleting original dir"
-. steps/step-delete-original.sh
+rm -rf $SUCCESSFUL_STEPS_FILE
 
 echo -e "\nAll done"
 echo -e "\nYou should now install graphics drivers, reboot, and enjoy."

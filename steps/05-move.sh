@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Moving to home"
+
 wd=$(pwd)
 
 if [ "$(dirname $wd)" == "/home/$USERNAME" ]; then

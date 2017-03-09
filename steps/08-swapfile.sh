@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Setting up swapfile"
+
 echo -n "Swapfile size (M = Mebibytes, G = Gibibytes, for example, 4G): "
 read swapfile_size
 fallocate -l $swapfile_size /swapfile

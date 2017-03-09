@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Setting up power management"
+
 pacman -S powertop
 echo \
 '[Unit]

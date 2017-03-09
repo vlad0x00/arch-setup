@@ -1,3 +1,5 @@
+echo "Setting up environment variables"
+
 echo -n "Your username: "
 read USERNAME
 ETHERNET_INTERFACE=$(ls /sys/class/net | grep -m 1 en)
