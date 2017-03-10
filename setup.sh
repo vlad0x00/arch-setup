@@ -26,7 +26,7 @@ for step in $(find steps -type f | sort); do
     . $step
 
     echo -e "\nPress enter to continue"
-    echo "Cancel the setup (Crtl+C) if the last step was not successful"
+    echo "Cancel the setup (Ctrl+C) if the last step was not successful"
     echo "The setup will continue from the last unsuccessful step on restart"
     read
 
