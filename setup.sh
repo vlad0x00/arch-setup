@@ -37,4 +37,4 @@ done
 rm -rf $SUCCESSFUL_STEPS_FILE
 
 echo "All done"
-echo "You should now install graphics drivers, reboot, and enjoy."
+echo "You should now install graphics drivers, setup bootloader, reboot, and enjoy."

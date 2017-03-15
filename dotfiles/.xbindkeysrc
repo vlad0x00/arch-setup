@@ -89,6 +89,10 @@
 "xfce4-screenshooter"
   Print
 
+#Copy whatever emote
+"echo '¯\_(ツ)_/¯' | xclip -selection clipboard"
+  Pause
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
