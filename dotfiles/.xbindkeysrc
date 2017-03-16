@@ -74,7 +74,7 @@
   XF86AudioLowerVolume
 
 #Mute/Unmute
-"pactl set-sink-mute @DEFAULT_SINK toggle"
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
   XF86AudioMute
 
 #Increase brightness
