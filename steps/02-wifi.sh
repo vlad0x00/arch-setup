@@ -2,5 +2,5 @@
 
 echo "Setting up wifi"
 
-pacman -S wpa_supplicant wpa_actiond
+pacman -S iw wpa_supplicant wpa_actiond dialog
 systemctl enable netctl-auto@$WIRELESS_INTERFACE
