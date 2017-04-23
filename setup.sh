@@ -18,7 +18,7 @@ cd $SETUP_DIR
 SUCCESSFUL_STEPS_FILE=successful-steps
 
 #Execute steps
-for step in $(find steps -type f | sort); do
+for step in $(find steps/*.sh -maxdepth 0 -type f | sort); do
     if [ -f $SUCCESSFUL_STEPS_FILE ] && [ ! -z $(grep $step $SUCCESSFUL_STEPS_FILE) ]; then
         continue
     fi

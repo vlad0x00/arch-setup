@@ -2,7 +2,7 @@
 
 echo "Setting up dotfiles"
 
-cd dotfiles
+cd steps/dotfiles
 if [[ $? -ne 0 ]]; then
     echo "Could not open the dotfiles directory"
     return
