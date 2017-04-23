@@ -1,5 +1,4 @@
 # arch-setup
-My Arch Linux setup scripts and dotfiles
 
 This is a simple automation of setting up Arch Linux after installation.
 
