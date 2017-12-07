@@ -27,3 +27,6 @@ rm -rf pacaur && rm -rf pacaur.tar.gz
 
 changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) NOPASSWD: ALL\)/# \1/')
 echo "$changed_sudoers" | tee /etc/sudoers >/dev/null
+
+changed_makepkg=$(cat /etc/makepkg.conf | sed "s/PKGEXT='.pkg.tar.zx'/PKGEXT='.pkg.tar'/")
+echo "$changed_makepkg" | tee /etc/makepkg.conf >/dev/null

@@ -66,11 +66,11 @@
 #  Control + b:2 + Release
 
 #Increase volume
-"pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ +5%"
+"pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+1 i3blocks"
   XF86AudioRaiseVolume
 
 #Decrease volume
-"pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ -5%"
+"pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+1 i3blocks"
   XF86AudioLowerVolume
 
 #Mute/Unmute
