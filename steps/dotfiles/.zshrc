@@ -110,4 +110,4 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-wal -rt
+(cat $HOME/.cache/wal/sequences &)
