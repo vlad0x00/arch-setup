@@ -1,1 +1,3 @@
 successful-steps
+steps/dotfiles/.config/*
+!steps/dotfiles/.config/xfce4
