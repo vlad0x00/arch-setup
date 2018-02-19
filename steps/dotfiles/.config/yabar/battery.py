@@ -12,8 +12,8 @@ def get_battery():
 	if (len(output) > 2):
 		remaining = " (" + output[2].split(" ")[1][:-3] + ")"
 	else:
-		remaining = ""
+		remaining = " (--:--)"
 
-	return "⚡ " + percent + remaining
+	return " " + percent + remaining
 
 print(get_battery())

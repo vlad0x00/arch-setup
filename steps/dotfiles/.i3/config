@@ -188,9 +188,6 @@ set $ws4 "4: &#xf121;"
 set $ws8 "8: &#xf008;"
 set $ws9 "9: &#xf1bc;"
 
-exec --no-startup-id xbindkeys &
-exec --no-startup-id compton -b
-exec --no-startup-id wal -i ~/wallpapers
 exec_always --no-startup-id pkill yabar; ~/.config/yabar/yabar-colors.sh; yabar -c /tmp/yabar.conf
 
 # Start i3bar to display a workspace bar (plus the system information i3status
