@@ -1,3 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
-i3-msg -t get_workspaces | jq -j '.[] | select(.rect.x | contains(0)) | if .visible == true then "<span bgcolor=\"#000000FF\">"+" "+.name+" "+"</span>" else " "+.name+" " end'
+import i3ipc
+import sys
+
+i3 = i3ipc.Connection()
+
+def print_workspaces():
+    output = ""
+    for workspace in i3.get_workspaces():
+        if workspace['focused']:
+            output += '<span bgcolor="#000000FF"> ' + str(workspace['num']) + ' </span>'
+        else:
+            output += " " + str(workspace['num']) + " "
+    print(output)
+    sys.stdout.flush()	
+
+def on_workspace_focus(self, e):
+    print_workspaces()
+
+print_workspaces()
+i3.on('workspace::focus', on_workspace_focus)
+i3.main()

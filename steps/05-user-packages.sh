@@ -11,4 +11,6 @@ echo "Changing default shell to zsh"
 
 chsh -s /usr/bin/zsh
 
-pip install pywal
+echo "Installing pip packages"
+
+pip install pywal i3ipc
