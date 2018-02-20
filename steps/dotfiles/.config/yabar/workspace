@@ -19,5 +19,5 @@ def on_workspace_focus(self, e):
     print_workspaces()
 
 print_workspaces()
-i3.on('workspace::focus', on_workspace_focus)
+i3.on('workspace', on_workspace_focus)
 i3.main()
