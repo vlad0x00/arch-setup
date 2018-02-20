@@ -6,9 +6,6 @@ if [[ ! $ENVIRONMENT_SET ]]; then
     read USERNAME
     export USERNAME
 
-    export ETHERNET_INTERFACE=$(ls /sys/class/net | grep -m 1 en)
-    export WIRELESS_INTERFACE=$(ls /sys/class/net | grep -m 1 wl)
-
     export ENVIRONMENT_SET=true
 fi
 

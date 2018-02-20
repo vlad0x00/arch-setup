@@ -13,3 +13,7 @@ fi
 
 useradd -m -s /bin/bash $USERNAME
 usermod -a -G wheel,audio,video $USERNAME
+
+echo "Setting up password"
+
+passwd $USERNAME
