@@ -21,8 +21,7 @@ passwd $USERNAME
 echo "Making home dirs"
 
 cd /home/$USERNAME
-mkdir -p projects
+mkdir -p work/projects
 mkdir -p random
 mkdir -p tools/bin
 mkdir -p wallpapers
-mkdir -p temp
