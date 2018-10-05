@@ -4,6 +4,8 @@ echo "Installing pacaur"
 
 cd /home/$USERNAME
 
+pacman -S wget
+
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz && \
 tar zxf cower.tar.gz && \
 cd cower && \
