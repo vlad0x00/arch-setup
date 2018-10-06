@@ -14,7 +14,7 @@ sudo -u $USERNAME pacaur -S google-chrome ttf-google-fonts-git i3-gaps-next-git 
 
 echo "Changing default shell to zsh"
 
-chsh -s /usr/bin/zsh
+sudo -u $USERNAME chsh -s /usr/bin/zsh
 
 echo "Installing pip packages"
 
