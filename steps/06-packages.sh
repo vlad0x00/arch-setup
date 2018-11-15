@@ -2,11 +2,11 @@
 
 echo "Installing user packages"
 
-pacman -S qt5-base qt4 vlc pulseaudio gedit geogebra gtop htop iotop jdk10-openjdk openjdk10-doc openjdk10-src \
+pacman -S qt5-base qt4 vlc pulseaudio gedit gtop htop iotop jdk10-openjdk openjdk10-doc openjdk10-src \
 java-openjfx java-openjfx-doc java-openjfx-src gimp cowsay lolcat fortune-mod nmap openssh python python-pip sl keepass \
-transmission-qt tree xfce4-terminal shotwell noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra neovim nautilus conky wget \
+tree xfce4-terminal shotwell noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra neovim nautilus conky wget \
 xfce4-screenshooter xclip base-devel zsh zsh-completions acpi sysstat alsa-utils chromium firefox redshift python-pywal \
-xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys mesa dmenu xcompmgr compton i3 i3-gaps
+xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys mesa dmenu compton i3-gaps
 
 echo "Installing AUR packages"
 
