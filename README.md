@@ -1,4 +1,4 @@
-# arch-setup
+# Arch Setup
 
 This is a simple automation of setting up Arch Linux after installation.
 
