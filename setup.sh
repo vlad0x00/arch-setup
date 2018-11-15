@@ -31,7 +31,7 @@ for step in $(find steps/*.sh -maxdepth 0 -type f | sort); do
     echo $step >>$SUCCESSFUL_STEPS_FILE
 done
 
-rm -rf $SUCCESSFUL_STEPS_FILE
+rm -f $SUCCESSFUL_STEPS_FILE
 
 echo "All done"
 echo "You should now install graphics drivers, setup bootloader, reboot, and enjoy."
