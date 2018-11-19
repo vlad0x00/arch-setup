@@ -7,8 +7,8 @@ cd /home/$USERNAME
 pacman -S wget
 
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz && \
-tar zxf pacaur.tar.gz && \
-cd pacaur && \
+tar zxf yay.tar.gz && \
+cd yay && \
 chown -R $USERNAME:$USERNAME . && \
 sudo -u $USERNAME makepkg -sri --skippgpcheck
 
