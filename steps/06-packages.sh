@@ -10,7 +10,7 @@ xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys 
 
 echo "Installing AUR packages"
 
-sudo -u $USERNAME yay -S yabar-git ttf-font-awesome-4 oh-my-zsh-git
+sudo -u $USERNAME yay -S yabar ttf-font-awesome-4 oh-my-zsh-git
 
 echo "Changing default shell to zsh"
 
