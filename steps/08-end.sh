@@ -2,6 +2,7 @@
 
 echo "Removing setup dir"
 
+cd /home/$USERNAME
 rm -rf $SETUP_DIR
 
 echo "Enabling root password prompt"
