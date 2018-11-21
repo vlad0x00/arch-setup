@@ -43,3 +43,5 @@ echo "initrd /initramfs-linux.img
 options root=$os_dev rw" >>/boot/loader/entries/arch.conf
 echo "Arch conf file content:"
 cat /boot/loader/entries/arch.conf
+
+mkinitcpio -p linux
