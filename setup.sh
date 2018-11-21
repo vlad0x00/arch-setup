@@ -18,6 +18,7 @@ export USERNAME
 if [ ! -f $COMPUTER_NAME_FILE ]; then
     echo -n "Computer name: "
     read computer_name
+    echo $computer_name >$COMPUTER_NAME_FILE
     echo $computer_name >/etc/hostname
 fi
 
