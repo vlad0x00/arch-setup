@@ -10,6 +10,7 @@ os_dev=$(df -h . | head -2 | tail -1 | awk '{print $1}')
 
 echo "Bootloader device at $bootloader_dev"
 echo "OS device at $os_dev"
+echo
 
 echo "Installing bootloader."
 bootctl --path=/boot install
