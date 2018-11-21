@@ -5,8 +5,7 @@ echo "Creating user."
 changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/')
 echo "$changed_sudoers" >/etc/sudoers
 
-id -u $USERNAME &>/dev/null
-if [[ $? -eq 0 ]]; then
+if [[ getent passwd | grep -c "^$USERNAME:" -eq 1 ]]; then
     echo "User $USERNAME already exists."
     return
 fi
