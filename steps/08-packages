@@ -10,6 +10,7 @@ xfce4-screenshooter xclip base-devel zsh zsh-completions acpi sysstat alsa-utils
 xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys mesa dmenu compton i3-gaps
 
 if [ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]; then
+    echo
     echo "Do you an Intel CPU?"
     select yn in "Yes" "No"; do
         case $yn in
@@ -20,6 +21,7 @@ if [ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]; then
 fi
 
 if [ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]; then
+    echo
     echo "Do you an AMD CPU?"
     select yn in "Yes" "No"; do
         case $yn in
