@@ -15,8 +15,8 @@ fi
 export USERNAME
 
 echo -n "Computer name: "
-read COMPUTER_NAME
-echo $COMPUTER_NAME >/etc/hostname
+read computer_name
+echo $computer_name >/etc/hostname
 
 export SETUP_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 cd $SETUP_DIR

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo "Setting up timezone."
+
+rm -f /etc/localtime
+
+while true; do
+    echo
+    ls /usr/share/zoneinfo
+    echo
+    echo -n "Select your region: "
+    read region
+    if [ -f "/usr/share/zoneinfo/$region" ] || [ -d "/usr/share/zoneinfo/$region" ]; then
+        break
+    fi
+    echo "Invalid input, try again."
+done
+
+if [ -f "/usr/share/zoneinfo/$region" ]; then
+    ln -sf /usr/share/zoneinfo/$region /etc/localtime
+else
+    while true; do
+        echo
+        ls /usr/share/zoneinfo/$region
+        echo
+        echo -n "Select your city: "
+        read city
+        if [ -f "/usr/share/zoneinfo/$region/$city" ]; then
+            break
+        fi
+        echo "Invalid input, try again."
+    done
+
+    ln -sf /usr/share/zoneinfo/$region/$city /etc/localtime
+fi
+
+hwclock --systohc
