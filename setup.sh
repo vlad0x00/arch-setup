@@ -4,6 +4,7 @@ set -e
 
 SUCCESSFUL_STEPS_FILE=successful-steps
 USERNAME_FILE=username
+COMPUTER_NAME_FILE=computer-name
 
 if [ -f $USERNAME_FILE ]; then
     USERNAME=$(cat $USERNAME_FILE)
@@ -14,9 +15,11 @@ else
 fi
 export USERNAME
 
-echo -n "Computer name: "
-read computer_name
-echo $computer_name >/etc/hostname
+if [ ! -f $COMPUTER_NAME_FILE ]; then
+    echo -n "Computer name: "
+    read computer_name
+    echo $computer_name >/etc/hostname
+fi
 
 export SETUP_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 cd $SETUP_DIR
