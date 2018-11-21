@@ -2,19 +2,24 @@
 
 set -e
 
-#Setup environment
-if [[ ! $ENVIRONMENT_SET ]]; then
+SUCCESSFUL_STEPS_FILE=successful-steps
+USERNAME_FILE=username
+
+if [ -f $USERNAME_FILE ]; then
+    USERNAME=$(cat $USERNAME_FILE)
+else
     echo -n "Your username: "
     read USERNAME
-    export USERNAME
-
-    export ENVIRONMENT_SET=true
+    echo -n $USERNAME >$USERNAME_FILE
 fi
+export USERNAME
+
+echo -n "Computer name: "
+read COMPUTER_NAME
+echo $COMPUTER_NAME >/etc/hostname
 
 export SETUP_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 cd $SETUP_DIR
-
-SUCCESSFUL_STEPS_FILE=successful-steps
 
 #Execute steps
 for step in $(find steps/* -maxdepth 0 -type f | sort); do
@@ -33,10 +38,10 @@ for step in $(find steps/* -maxdepth 0 -type f | sort); do
     echo $step >>$SUCCESSFUL_STEPS_FILE
 done
 
-echo "Removing setup dir"
+echo "Removing setup dir."
 
 cd /home/$USERNAME
 rm -rf $SETUP_DIR
 
-echo "All done"
-echo "You should now install graphics drivers, reboot, and enjoy."
+echo "Setup finished."
+echo "Things missing: graphics drivers and /home/wallpapers."

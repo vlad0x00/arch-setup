@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Setting up network."
+
+pacman -S iw wpa_supplicant wpa_actiond dialog
+WIRELESS_INTERFACE=$(ls /sys/class/net | grep -m 1 wl)
+systemctl enable netctl-auto@$WIRELESS_INTERFACE
+
+HOST_NAME=$(cat /etc/hostname)
+echo "127.0.0.1	localhost
+::1		localhost
+127.0.1.1	$HOST_NAME.localdomain	$HOST_NAME" >/etc/hosts
+
+echo "/etc/hosts content set to:"
+cat /etc/hosts

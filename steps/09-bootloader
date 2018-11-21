@@ -1,9 +1,20 @@
 #!/bin/bash
 
+echo "Setting up bootloader."
+
+cd /boot
+bootloader_dev=$(df -h . | head -2 | tail -1 | awk '{print $1}')
+cd /home/$USERNAME
+os_dev=$(df -h . | head -2 | tail -1 | awk '{print $1}')
+
+echo "Bootloader device at $bootloader_dev"
+echo "OS device at $os_dev"
+
 echo "Installing bootloader."
-
 bootctl --path=/boot install
+echo
 
+echo "Setting bootloader pacman hook."
 mkdir -p /etc/pacman.d/hooks
 echo "[Trigger]
 Type = Package
@@ -14,16 +25,21 @@ Target = systemd
 Description = Updating systemd-boot
 When = PostTransaction
 Exec = /usr/bin/bootctl update" >/etc/pacman.d/hooks/systemd-boot.hook
+echo "Hook file content:"
+cat /etc/pacman.d/hooks/systemd-boot.hook
+echo
 
 echo "default arch" >/boot/loader/loader.conf
-
-cd /home/$USERNAME
-os_dev=$(df -h . | head -2 | tail -1 | awk '{print $1}')
 
 echo "title Arch Linux
 linux /vmlinuz-linux" >/boot/loader/entries/arch.conf
 if [ -f /boot/intel-ucode.img ]; then
     echo "initrd /intel-ucode.img" >>/boot/loader/entries/arch.conf
 fi
+if [ -f /boot/amd-ucode.img ]; then
+    echo "initrd /amd-ucode.img" >>/boot/loader/entries/arch.conf
+fi
 echo "initrd /initramfs-linux.img
 options root=$os_dev rw" >>/boot/loader/entries/arch.conf
+echo "Arch conf file content:"
+cat /boot/loader/entries/arch.conf

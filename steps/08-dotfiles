@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Setting up dotfiles"
+echo "Setting up dotfiles."
 
 cd /home/$USERNAME
 rm -rf dotfiles

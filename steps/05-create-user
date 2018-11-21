@@ -1,24 +1,26 @@
 #!/bin/bash
 
-echo "Creating user"
+echo "Creating user."
 
 changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/')
 echo "$changed_sudoers" >/etc/sudoers
 
 id -u $USERNAME &>/dev/null
 if [[ $? -eq 0 ]]; then
-    echo "User $USERNAME already exists"
+    echo "User $USERNAME already exists."
     return
 fi
 
 useradd -m -s /bin/bash $USERNAME
 usermod -a -G wheel,audio,video $USERNAME
 
-echo "Setting up password"
-
+echo "Setting up passwords."
+echo "Root:"
+passwd
+echo "$USERNAME:"
 passwd $USERNAME
 
-echo "Making home dirs"
+echo "Making home dirs."
 
 cd /home/$USERNAME
 sudo -u $USERNAME mkdir -p projects

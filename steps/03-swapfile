@@ -3,12 +3,16 @@
 echo "Setting up swapfile."
 
 if [ -f /swapfile ]; then
+    echo "A swapfile already exists, removing."
     swapoff -a
     rm -f /swapfile
 fi
 
 total_mem_kib=$(grep MemTotal /proc/meminfo | awk '{print $2}')
 swapfile_size=$(( $total_mem_kib / 1024 ))M
+
+echo "Creating a swapfile of size $swapfile_size at /swapfile."
+
 fallocate -l $swapfile_size /swapfile
 chmod 600 /swapfile
 mkswap /swapfile

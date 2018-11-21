@@ -1,6 +1,7 @@
 # Arch Setup
 
-This is a simple automation of setting up Arch Linux after installation.
+This is a simple automation of setting up Arch Linux. It's supposed to be run after you chroot into /mnt of
+pacstrapped arch and have set timezone and clock up.
 
 The setup.sh script executes steps from the steps folder in the order they're numbered, so it's fairly easy to
 edit the automation and add or remove steps.
