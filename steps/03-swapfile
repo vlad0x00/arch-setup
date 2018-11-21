@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Setting up swapfile."
+
+if [ -f /swapfile ]; then
+    swapoff -a
+    rm -f /swapfile
+fi
+
+total_mem_kib=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+swapfile_size=$(( $total_mem_kib / 1024 ))M
+fallocate -l $swapfile_size /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+if [ $(grep /swapfile /etc/fstab | wc -l) -eq 0 ]; then
+	echo "/swapfile	none	swap	defaults	0	0" >>/etc/fstab
+fi

@@ -3,7 +3,7 @@
 echo "Creating user"
 
 changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/')
-echo "$changed_sudoers" | tee /etc/sudoers >/dev/null
+echo "$changed_sudoers" >/etc/sudoers
 
 id -u $USERNAME &>/dev/null
 if [[ $? -eq 0 ]]; then
@@ -25,3 +25,4 @@ sudo -u $USERNAME mkdir -p projects
 sudo -u $USERNAME mkdir -p random
 sudo -u $USERNAME mkdir -p tools
 sudo -u $USERNAME mkdir -p wallpapers
+cp $SETUP_DIR/arch.png wallpapers

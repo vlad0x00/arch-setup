@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 #Setup environment
 if [[ ! $ENVIRONMENT_SET ]]; then
     echo -n "Your username: "
@@ -15,7 +17,7 @@ cd $SETUP_DIR
 SUCCESSFUL_STEPS_FILE=successful-steps
 
 #Execute steps
-for step in $(find steps/*.sh -maxdepth 0 -type f | sort); do
+for step in $(find steps/* -maxdepth 0 -type f | sort); do
     if [ -f $SUCCESSFUL_STEPS_FILE ] && [ ! -z $(grep $step $SUCCESSFUL_STEPS_FILE) ]; then
         continue
     fi
@@ -31,7 +33,10 @@ for step in $(find steps/*.sh -maxdepth 0 -type f | sort); do
     echo $step >>$SUCCESSFUL_STEPS_FILE
 done
 
-rm -f $SUCCESSFUL_STEPS_FILE
+echo "Removing setup dir"
+
+cd /home/$USERNAME
+rm -rf $SETUP_DIR
 
 echo "All done"
-echo "You should now install graphics drivers, setup bootloader, reboot, and enjoy."
+echo "You should now install graphics drivers, reboot, and enjoy."

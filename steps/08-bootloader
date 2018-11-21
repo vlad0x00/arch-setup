@@ -1,0 +1,29 @@
+#!/bin/bash
+
+echo "Installing bootloader."
+
+bootctl --path=/boot install
+
+mkdir -p /etc/pacman.d/hooks
+echo "[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Updating systemd-boot
+When = PostTransaction
+Exec = /usr/bin/bootctl update" >/etc/pacman.d/hooks/systemd-boot.hook
+
+echo "default arch" >/boot/loader/loader.conf
+
+cd /home/$USERNAME
+os_dev=$(df -h . | head -2 | tail -1 | awk '{print $1}')
+
+echo "title Arch Linux
+linux /vmlinuz-linux" >/boot/loader/entries/arch.conf
+if [ -f /boot/intel-ucode.img ]; then
+    echo "initrd /intel-ucode.img" >>/boot/loader/entries/arch.conf
+fi
+echo "initrd /initramfs-linux.img
+options root=$os_dev rw" >>/boot/loader/entries/arch.conf
