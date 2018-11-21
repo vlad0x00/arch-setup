@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Setting up localization."
+echo
 
 changed_locale=$(cat /etc/locale.gen | sed 's/#\(en_US.UTF-8 UTF-8\)/\1/')
 echo "$changed_locale" >/etc/locale.gen

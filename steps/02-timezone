@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Setting up timezone."
+echo
 
 rm -f /etc/localtime
 

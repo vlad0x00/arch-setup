@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Setting up user packages."
+echo
 
 pacman -S qt5-base qt4 vlc pulseaudio gedit gtop htop iotop jdk10-openjdk openjdk10-doc openjdk10-src \
 java-openjfx java-openjfx-doc java-openjfx-src gimp cowsay lolcat fortune-mod nmap openssh python python-pip sl keepass \

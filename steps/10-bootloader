@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Setting up bootloader."
+echo
 
 cd /boot
 bootloader_dev=$(df -h . | head -2 | tail -1 | awk '{print $1}')

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Enabling root password prompt."
+echo
 
 changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) NOPASSWD: ALL\)/# \1/')
 echo "$changed_sudoers" >/etc/sudoers

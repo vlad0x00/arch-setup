@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Creating user."
+echo
 
 changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/')
 echo "$changed_sudoers" >/etc/sudoers

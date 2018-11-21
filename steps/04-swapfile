@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Setting up swapfile."
+echo
 
 if [ -f /swapfile ]; then
     echo "A swapfile already exists, removing."
