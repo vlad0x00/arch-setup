@@ -32,6 +32,7 @@ fi
 echo "Installing AUR packages."
 sudo -u $USERNAME yay -S yabar ttf-font-awesome-4 oh-my-zsh-git
 
+echo
 echo "Changing default shell to zsh."
 sudo -u $USERNAME chsh -s /usr/bin/zsh
 
