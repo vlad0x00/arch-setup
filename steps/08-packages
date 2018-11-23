@@ -8,7 +8,7 @@ java-openjfx java-openjfx-doc java-openjfx-src gimp cowsay lolcat fortune-mod nm
 tree xfce4-terminal shotwell ttf-ubuntu-font-family neovim nautilus conky wget feh \
 xfce4-screenshooter xclip base-devel zsh zsh-completions acpi sysstat alsa-utils chromium firefox redshift python-pywal \
 xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys mesa dmenu compton i3-gaps \
-noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji
+noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji python-dbus
 
 if [ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]; then
     echo
