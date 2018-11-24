@@ -1,0 +1,63 @@
+#!/bin/bash
+
+echo "Setting up keyboard nightlight"
+echo
+
+function enable_nightlight() {
+    systemctl disable keyboard-nightlight.timer 2>/dev/null
+
+    echo "[Unit]
+Description=Turns on keyboard backlight at night
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/keyboard-nightlight
+
+[Install]
+WantedBy=multi-user.target" >/etc/systemd/system/keyboard-nightlight.service
+
+    echo "[Unit]
+Description=Turns on keyboard backlight at night
+
+[Timer]
+OnStartupSec=20s
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target" >/etc/systemd/system/keyboard-nightlight.timer
+
+echo "#!/bin/bash
+
+maximum=\$(dbus-send --print-reply --system --type=method_call --dest='org.freedesktop.UPower' \\
+'/org/freedesktop/UPower/KbdBacklight' 'org.freedesktop.UPower.KbdBacklight.GetMaxBrightness')
+maximum=\$(echo \"\$maximum\" | head -n 2 | tail -n 1 | awk '{print \$2}')
+
+night=\$(redshift -p | head -n 2 | tail -n 1 | grep -i night | wc -l)
+
+if [ \$night -eq 1 ]; then
+    brightness=\$maximum
+else
+    brightness=0
+fi
+
+dbus-send --system --type=method_call --dest='org.freedesktop.UPower' \\
+'/org/freedesktop/UPower/KbdBacklight' 'org.freedesktop.UPower.KbdBacklight.SetBrightness' \\
+int32:\$brightness" >/usr/local/bin/keyboard-nightlight
+
+    systemctl enable keyboard-nightlight.timer
+}
+
+function disable_nightlight() {
+    systemctl disable keyboard-nightlight.timer 2>/dev/null
+    rm -f /etc/systemd/system/keyboard-nightlight.service
+    rm -f /etc/systemd/system/keyboard-nightlight.timer
+    rm -f /usr/local/bin/keyboard-nightlight
+}
+
+echo "Do you have keyboard backlight?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) enable_nightlight; break;;
+        No ) disable_nightlight; break;;
+    esac
+done
