@@ -4,29 +4,7 @@ echo "Setting up keyboard nightlight"
 echo
 
 function enable_nightlight() {
-    systemctl disable keyboard-nightlight.timer 2>/dev/null
-
-    echo "[Unit]
-Description=Turns on keyboard backlight at night
-
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/keyboard-nightlight
-
-[Install]
-WantedBy=multi-user.target" >/etc/systemd/system/keyboard-nightlight.service
-
-    echo "[Unit]
-Description=Turns on keyboard backlight at night
-
-[Timer]
-OnStartupSec=20s
-OnUnitActiveSec=1h
-
-[Install]
-WantedBy=timers.target" >/etc/systemd/system/keyboard-nightlight.timer
-
-echo "#!/bin/bash
+    echo "#!/bin/bash
 
 maximum=\$(dbus-send --print-reply --system --type=method_call --dest='org.freedesktop.UPower' \\
 '/org/freedesktop/UPower/KbdBacklight' 'org.freedesktop.UPower.KbdBacklight.GetMaxBrightness')
@@ -44,20 +22,64 @@ dbus-send --system --type=method_call --dest='org.freedesktop.UPower' \\
 '/org/freedesktop/UPower/KbdBacklight' 'org.freedesktop.UPower.KbdBacklight.SetBrightness' \\
 int32:\$brightness" >/usr/local/bin/keyboard-nightlight
 
-    systemctl enable keyboard-nightlight.timer
+echo "#!/bin/bash
+
+maximum=\$(dbus-send --print-reply --system --type=method_call --dest='org.freedesktop.UPower' \\
+'/org/freedesktop/UPower/KbdBacklight' 'org.freedesktop.UPower.KbdBacklight.GetMaxBrightness')
+maximum=\$(echo \"\$maximum\" | head -n 2 | tail -n 1 | awk '{print \$2}')
+
+dbus-send --system --type=method_call --dest='org.freedesktop.UPower' \
+'/org/freedesktop/UPower/KbdBacklight' 'org.freedesktop.UPower.KbdBacklight.SetBrightness' \
+int32:\$maximum" >/usr/local/bin/keyboard-backlight-on
+
+    echo "#!/bin/bash
+
+dbus-send --system --type=method_call --dest='org.freedesktop.UPower' \
+'/org/freedesktop/UPower/KbdBacklight' 'org.freedesktop.UPower.KbdBacklight.SetBrightness' \
+int32:0" >/usr/local/bin/keyboard-backlight-off
+
+    chmod +x /usr/local/bin/keyboard-nightlight
+    chmod +x /usr/local/bin/keyboard-backlight-on
+    chmod +x /usr/local/bin/keyboard-backlight-off
+
+    echo "[Unit]
+Description=Turns on keyboard backlight at night
+
+[Service]
+Type=oneshot
+User=$USERNAME
+Group=$USERNAME
+ExecStart=/usr/local/bin/keyboard-nightlight
+
+[Install]
+WantedBy=multi-user.target" >/etc/systemd/system/keyboard-nightlight.service
+
+    echo "[Unit]
+Description=Turns on keyboard backlight at night
+
+[Timer]
+OnCalendar=0/1:00:00
+
+[Install]
+WantedBy=timers.target" >/etc/systemd/system/keyboard-nightlight.timer
+
+    echo "Keyboard nightlight enabled."
 }
 
 function disable_nightlight() {
-    systemctl disable keyboard-nightlight.timer 2>/dev/null
+    rm -f /usr/local/bin/keyboard-nightlight
+    rm -f /usr/local/bin/keyboard-backlight-on
+    rm -f /usr/local/bin/keyboard-backlight-off
+
     rm -f /etc/systemd/system/keyboard-nightlight.service
     rm -f /etc/systemd/system/keyboard-nightlight.timer
-    rm -f /usr/local/bin/keyboard-nightlight
 }
 
+disable_nightlight
 echo "Do you have keyboard backlight?"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) enable_nightlight; break;;
-        No ) disable_nightlight; break;;
+        No ) break;;
     esac
 done
