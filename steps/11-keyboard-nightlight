@@ -63,10 +63,14 @@ OnCalendar=0/1:00:00
 [Install]
 WantedBy=timers.target" >/etc/systemd/system/keyboard-nightlight.timer
 
+    systemctl enable keyboard-nightlight.timer
+
     echo "Keyboard nightlight enabled."
 }
 
 function disable_nightlight() {
+    systemctl disable keyboard-nightlight.timer 2>/dev/null
+
     rm -f /usr/local/bin/keyboard-nightlight
     rm -f /usr/local/bin/keyboard-backlight-on
     rm -f /usr/local/bin/keyboard-backlight-off
