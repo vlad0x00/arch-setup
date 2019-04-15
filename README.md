@@ -2,7 +2,7 @@
 
 This is a simple automation of setting up Arch Linux.
 
-First make sure to:
+First make sure to (as instructed by Arch Wiki install page):
 - timedatectl set-ntp true
 - Create, format and mount the partitions (one for bootloader (/boot) and one for OS (/))
 - genfstab -U /mnt >> /mnt/etc/fstab
