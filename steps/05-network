@@ -4,6 +4,7 @@ echo "Setting up network."
 echo
 
 pacman -S iw wpa_supplicant wpa_actiond dialog
+
 wireless_interface=$(ls /sys/class/net | grep -m 1 wl)
 systemctl enable netctl-auto@$wireless_interface
 
@@ -11,6 +12,10 @@ hostname=$(cat /etc/hostname)
 echo "127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	$hostname.localdomain	$hostname" >/etc/hosts
+
+changed_default_link=$(cat /usr/lib/systemd/network/99-default.link | \
+                       sed 's~MACAddressPolicy=.*~MACAddressPolicy=random~')
+echo "$changed_default_link" >/usr/lib/systemd/network/99-default.link
 
 echo
 echo "/etc/hosts content set to:"
