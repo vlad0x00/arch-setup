@@ -5,7 +5,7 @@ set -e
 echo "Setting up VPN"
 echo
 
-function enable_nightlight() {
+function enable_vpn() {
     echo "[Unit]
 Description=Turn on VPN once online
 After=network-online.target
