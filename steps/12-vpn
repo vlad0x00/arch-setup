@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -e
+
+echo "Setting up VPN"
+echo
+
+function enable_nightlight() {
+    echo "[Unit]
+Description=Turn on VPN once online
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=bash -c 'export USER=root SUDO_USER=$USERNAME SUDO_UID=1000 SUDO_GID=1000 \
+&& until ping -c1 protonvpn.com >/dev/null 2>&1; do sleep 20; done && protonvpn c -f && while ping -c1 protonvpn.com >/dev/null 2>&1; do sleep 20; done'
+ExecStop=bash -c 'export USER=root SUDO_USER=$USERNAME SUDO_UID=1000 SUDO_GID=1000 && protonvpn d'
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target" >/etc/systemd/system/vpn.service
+
+    systemctl enable vpn.service
+
+    echo "VPN enabled."
+}
+
+function disable_vpn() {
+    systemctl disable vpn.service 2>/dev/null
+    rm -f /etc/systemd/system/vpn.service
+}
+
+disable_vpn
+echo "Do you want to enable VPN?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) enable_vpn; break;;
+        No ) break;;
+    esac
+done
