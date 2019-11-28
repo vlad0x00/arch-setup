@@ -6,6 +6,8 @@ echo "Setting up VPN"
 echo
 
 function enable_vpn() {
+    protonvpn init
+
     echo "[Unit]
 Description=Turn on VPN once online
 After=network-online.target
