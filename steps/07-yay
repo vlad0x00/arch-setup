@@ -10,10 +10,10 @@ cd /home/$USERNAME
 pacman -S wget
 
 rm -rf yay yay.tar.gz
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz && \
-tar zxf yay.tar.gz && \
-cd yay && \
-chown -R $USERNAME:$USERNAME . && \
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
+tar zxf yay.tar.gz
+cd yay
+chown -R $USERNAME:$USERNAME .
 sudo -u $USERNAME makepkg -sri
 
 cd /home/$USERNAME
