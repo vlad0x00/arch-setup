@@ -44,4 +44,4 @@ sudo -u $USERNAME chsh -s /usr/bin/zsh
 
 echo
 echo "Installing pip packages."
-pip install i3ipc
+pip install i3ipc protonvpn-cli
