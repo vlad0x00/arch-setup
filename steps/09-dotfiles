@@ -6,10 +6,8 @@ echo "Setting up dotfiles."
 echo
 
 cd /home/$USERNAME
-rm -rf dotfiles
+rm -rf .dotfiles
 
-echo -n "dotfiles git URL: "
-read url
-sudo -u $USERNAME git clone $url && \
-cd dotfiles && \
+sudo -u $USERNAME git clone https://github.com/schutzekatze/.dotfiles
+cd .dotfiles
 sudo -u $USERNAME ./setup.sh
