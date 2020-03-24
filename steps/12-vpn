@@ -18,6 +18,7 @@ Type=simple
 User=root
 Group=root
 ExecStart=bash -c \"export USER=root SUDO_USER=schutz SUDO_UID=1000 SUDO_GID=1000 \
+&& if [[ -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; then sleep 10; fi \
 && until [[ ! -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; do sleep 20; done \
 && protonvpn c -f && while [[ ! -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; do sleep 20; done\"
 ExecStop=bash -c \"export USER=root SUDO_USER=schutz SUDO_UID=1000 SUDO_GID=1000 && protonvpn d\"
