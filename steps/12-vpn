@@ -17,10 +17,11 @@ Wants=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStart=bash -c \"export USER=root SUDO_USER=schutz SUDO_UID=1000 SUDO_GID=1000 \
-&& if [[ -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; then sleep 10; fi \
-&& until [[ ! -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; do sleep 20; done \
-&& protonvpn c -f && while [[ ! -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; do sleep 20; done\"
+ExecStart=bash -c \"export USER=root SUDO_USER=schutz SUDO_UID=1000 SUDO_GID=1000 retries_until=0 retries_while=0; \
+until [[ ! -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; do ((retries_until++)); \
+if [[ \$retries_until -le 5 ]]; then sleep 5; else sleep 20; fi; done; protonvpn c -f; \
+while [[ ! -z \$(nmap -sn protonvpn.com 2>/dev/null | grep 'Host is up') ]]; do ((retries_while++)); \
+if [[ \$retries_while -le 5 ]]; then sleep 5; else sleep 20; fi; done\"
 ExecStop=bash -c \"export USER=root SUDO_USER=schutz SUDO_UID=1000 SUDO_GID=1000 && protonvpn d\"
 Restart=always
 RestartSec=10
