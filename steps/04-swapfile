@@ -12,11 +12,11 @@ if [ -f /swapfile ]; then
 fi
 
 total_mem_kib=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-swapfile_size=$(( $total_mem_kib / 1024 ))M
+swapfile_size=$(( $total_mem_kib / 1024 ))
 
 echo "Creating a swapfile of size $swapfile_size at /swapfile."
 
-fallocate -l $swapfile_size /swapfile
+dd if=/dev/zero of=/swapfile bs=1M count=$swapfile_size status=progress
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
