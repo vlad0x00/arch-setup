@@ -1,6 +1,6 @@
 # Arch Setup
 
-This is a simple automation for [Arch Linux](https://www.archlinux.org/) setup.
+Step-by-step script for [Arch Linux](https://www.archlinux.org/) setup.
 
 First make sure to (as instructed by [Arch Wiki](https://wiki.archlinux.org/) install page / update as needed):
 - timedatectl set-ntp true
