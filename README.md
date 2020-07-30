@@ -1,8 +1,8 @@
 # Arch Setup
 
-This is a simple automation for Arch Linux setup.
+This is a simple automation for [Arch Linux](https://www.archlinux.org/) setup.
 
-First make sure to (as instructed by Arch Wiki install page / update as needed):
+First make sure to (as instructed by [Arch Wiki](https://wiki.archlinux.org/) install page / update as needed):
 - timedatectl set-ntp true
 - Create, format, and mount the partitions (one for bootloader (/boot) and one for OS (/))
 - Setup full disk encryption
