@@ -17,8 +17,8 @@ Wants=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStart=/home/schutz/.utils/connect-vpn %i
-ExecStop=/home/schutz/.utils/disconnect-vpn
+ExecStart=/home/$USERNAME/.utils/connect-vpn %i
+ExecStop=/home/$USERNAME/.utils/disconnect-vpn
 Restart=always
 RestartSec=10
 
