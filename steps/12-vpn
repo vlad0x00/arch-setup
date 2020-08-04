@@ -17,22 +17,22 @@ Wants=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStart=/home/$USERNAME/.utils/connect-vpn
-ExecStop=/home/$USERNAME/.utils/disconnect-vpn
+ExecStart=/home/schutz/.utils/connect-vpn %i
+ExecStop=/home/schutz/.utils/disconnect-vpn
 Restart=always
 RestartSec=10
 
 [Install]
-WantedBy=multi-user.target" >/etc/systemd/system/vpn.service
+WantedBy=multi-user.target" >/etc/systemd/system/vpn@.service
 
-    systemctl enable vpn.service
+    systemctl enable vpn@random.service
 
     echo "VPN enabled."
 }
 
 function disable_vpn() {
-    systemctl disable vpn.service 2>/dev/null
-    rm -f /etc/systemd/system/vpn.service
+    systemctl disable vpn@random.service 2>/dev/null
+    rm -f /etc/systemd/system/vpn@.service
 }
 
 disable_vpn
