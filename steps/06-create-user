@@ -9,8 +9,8 @@ changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/')
 echo "$changed_sudoers" >/etc/sudoers
 
 if [[ $(getent passwd | grep -c "^$USERNAME:") -eq 1 ]]; then
-    echo "User $USERNAME already exists, removing."
-    userdel -r -f $USERNAME
+  echo "User $USERNAME already exists, removing."
+  userdel -r -f $USERNAME
 fi
 
 useradd -m -s /bin/bash $USERNAME
@@ -28,5 +28,10 @@ cd /home/$USERNAME
 sudo -u $USERNAME mkdir -p projects
 sudo -u $USERNAME mkdir -p random
 sudo -u $USERNAME mkdir -p tools
-sudo -u $USERNAME mkdir -p wallpapers
-cp $SETUP_DIR/arch.png wallpapers
+
+echo "Setting up basic wallpapers."
+
+pacman -S archlinux-wallpaper
+
+sudo -u $USERNAME mkdir -p .wallpapers
+ln -s /usr/share/backgrounds/archlinux/* .wallpapers

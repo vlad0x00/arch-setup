@@ -6,9 +6,9 @@ echo "Setting up VPN"
 echo
 
 function enable_vpn() {
-    protonvpn init
+  protonvpn init
 
-    echo "[Unit]
+  echo "[Unit]
 Description=Turn on VPN once online
 After=network-online.target
 Wants=network-online.target
@@ -25,21 +25,21 @@ RestartSec=10
 [Install]
 WantedBy=multi-user.target" >/etc/systemd/system/vpn@.service
 
-    systemctl enable vpn@random.service
+  systemctl enable vpn@fast.service
 
-    echo "VPN enabled."
+  echo "VPN enabled."
 }
 
 function disable_vpn() {
-    systemctl disable vpn@random.service 2>/dev/null
-    rm -f /etc/systemd/system/vpn@.service
+  systemctl disable vpn@fast.service 2>/dev/null
+  rm -f /etc/systemd/system/vpn@.service
 }
 
 disable_vpn
 echo "Do you want to enable VPN?"
 select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) enable_vpn; break;;
-        No ) break;;
-    esac
+  case $yn in
+    Yes ) enable_vpn; break;;
+    No ) break;;
+  esac
 done

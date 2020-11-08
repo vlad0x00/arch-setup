@@ -5,41 +5,42 @@ set -e
 echo "Setting up user packages."
 echo
 
-pacman -S qt5-base qt4 vlc pulseaudio gedit gtop htop iotop jdk10-openjdk openjdk10-doc openjdk10-src \
-java-openjfx java-openjfx-doc java-openjfx-src gimp cowsay lolcat fortune-mod nmap openssh python python-pip sl keepass \
-tree xfce4-terminal shotwell ttf-ubuntu-font-family neovim nautilus conky wget feh \
-xfce4-screenshooter xclip base-devel zsh zsh-completions acpi sysstat alsa-utils chromium firefox redshift python-pywal \
-xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys mesa dmenu compton i3-gaps \
-noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji tlp
+BASIC_PACKAGES=( jdk14-openjdk openjdk14-doc openjdk14-src java-openjfx java-openjfx-doc java-openjfx-src openssh python python-pip acpi sysstat mesa tlp )
+
+MEDIA_PACKAGES=( pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-rtp pulseaudio-zeroconf pavucontrol also-cardprofiles alsa-firmware alsa-lib alsa-oss  alsa-plugins alsa-topology-conf alsa-ucm-conf alsa-utils ffmpeg )
+
+INTERFACE_PACKAGES=( i3-gaps compton dmenu noto-fonts noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys xclip zsh zsh-completions python-pywal redshift xfce4-terminal xfce4-screenshooter ttf-ubuntu-font-family nautilus )
+
+USEFUL_SOFTWARE=( gedit krita inkscape imagemagick vlc firefox chromium signal-desktop telegram-desktop discord pandoc texlive-most texlive-lang biber rclone htop vnstat keepassxc tree shotwell feh wget cowsay lolcat sl nmap neovim asciiqiarium audacity boost boost-libs tbb pigz clang rustup code opencv meson ninja graphviz stellarium tor torbrowser-launcher )
+
+pacman -S base-devel ${BASIC_PACKAGES[@]} ${MEDIA_PACKAGES[@]} ${INTERFACE_PACKAGES[@]} ${USEFUL_SOFTWARE[@]}
 
 systemctl enable tlp
 systemctl enable tlp-sleep
 
-if [ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]; then
-    echo
-    echo "Do you have an Intel CPU?"
-    select yn in "Yes" "No"; do
-        case $yn in
-            Yes ) pacman -S intel-ucode; break;;
-            No ) break;;
-        esac
-    done
-fi
-
-if [ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]; then
-    echo
-    echo "Do you have an AMD CPU?"
-    select yn in "Yes" "No"; do
-        case $yn in
+if [[ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]]; then
+  echo
+  echo "Do you have an Intel CPU?"
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes ) pacman -S intel-ucode; break;;
+      No ) 
+        echo
+        echo "Do you have an AMD CPU?"
+        select yn in "Yes" "No"; do
+          case $yn in
             Yes ) pacman -S amd-ucode; break;;
             No ) break;;
-        esac
-    done
+          esac
+        done
+        break;;
+    esac
+  done
 fi
 
 echo
 echo "Installing AUR packages."
-sudo -u $USERNAME yay -S yabar-git ttf-font-awesome-4 oh-my-zsh-git
+sudo -u $USERNAME yay -S yabar-git ttf-font-awesome-5 oh-my-zsh-git
 
 echo
 echo "Changing default shell to zsh."
