@@ -13,12 +13,12 @@ INTERFACE_PACKAGES=( i3-gaps compton dmenu noto-fonts noto-fonts noto-fonts-cjk 
 
 USEFUL_SOFTWARE=( gedit krita inkscape imagemagick vlc firefox chromium signal-desktop telegram-desktop discord pandoc texlive-most texlive-lang biber rclone htop vnstat keepassxc tree shotwell feh wget cowsay lolcat sl nmap neovim asciiqiarium audacity boost boost-libs tbb pigz clang rustup code opencv meson ninja graphviz stellarium tor torbrowser-launcher )
 
-pacman -S base-devel ${BASIC_PACKAGES[@]} ${MEDIA_PACKAGES[@]} ${INTERFACE_PACKAGES[@]} ${USEFUL_SOFTWARE[@]}
+pacman -S base-devel "${BASIC_PACKAGES[@]}" "${MEDIA_PACKAGES[@]}" "${INTERFACE_PACKAGES[@]}" "${USEFUL_SOFTWARE[@]}"
 
 systemctl enable tlp
 systemctl enable tlp-sleep
 
-if [[ $(pacman -Qe | grep 'intel-ucode\|amd-ucode' | wc -l) -eq 0 ]]; then
+if ! pacman -Qe | grep -q 'intel-ucode\|amd-ucode'; then
   echo
   echo "Do you have an Intel CPU?"
   select yn in "Yes" "No"; do
@@ -40,11 +40,11 @@ fi
 
 echo
 echo "Installing AUR packages."
-sudo -u $USERNAME yay -S yabar-git ttf-font-awesome-5 oh-my-zsh-git
+sudo -u "$USERNAME" yay -S yabar-git ttf-font-awesome-5 oh-my-zsh-git
 
 echo
 echo "Changing default shell to zsh."
-sudo -u $USERNAME chsh -s /usr/bin/zsh
+sudo -u "$USERNAME" chsh -s /usr/bin/zsh
 
 echo
 echo "Installing pip packages."

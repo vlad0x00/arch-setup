@@ -5,33 +5,33 @@ set -e
 echo "Creating user."
 echo
 
-changed_sudoers=$(cat /etc/sudoers | sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/')
+changed_sudoers=$(sed 's/.*\(%wheel ALL=(ALL) ALL\)/\1/' /etc/sudoers)
 echo "$changed_sudoers" >/etc/sudoers
 
 if [[ $(getent passwd | grep -c "^$USERNAME:") -eq 1 ]]; then
   echo "User $USERNAME already exists, removing."
-  userdel -r -f $USERNAME
+  userdel -r -f "$USERNAME"
 fi
 
-useradd -m -s /bin/bash $USERNAME
-usermod -a -G wheel,audio,video $USERNAME
+useradd -m -s /bin/bash "$USERNAME"
+usermod -a -G wheel,audio,video "$USERNAME"
 
 echo "Setting up passwords."
 echo "Root:"
 passwd
 echo "$USERNAME:"
-passwd $USERNAME
+passwd "$USERNAME"
 
 echo "Making home dirs."
 
-cd /home/$USERNAME
-sudo -u $USERNAME mkdir -p projects
-sudo -u $USERNAME mkdir -p random
-sudo -u $USERNAME mkdir -p tools
+cd /home/"$USERNAME"
+sudo -u "$USERNAME" mkdir -p projects
+sudo -u "$USERNAME" mkdir -p random
+sudo -u "$USERNAME" mkdir -p tools
 
 echo "Setting up basic wallpapers."
 
 pacman -S archlinux-wallpaper
 
-sudo -u $USERNAME mkdir -p .wallpapers
+sudo -u "$USERNAME" mkdir -p .wallpapers
 ln -s /usr/share/backgrounds/archlinux/* .wallpapers

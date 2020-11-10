@@ -5,7 +5,7 @@ set -e
 echo "Setting up yay."
 echo
 
-cd /home/$USERNAME
+cd /home/"$USERNAME"
 
 pacman -S wget
 
@@ -13,11 +13,11 @@ rm -rf yay yay.tar.gz
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
 tar zxf yay.tar.gz
 cd yay
-chown -R $USERNAME:$USERNAME .
-sudo -u $USERNAME makepkg -sri
+chown -R "$USERNAME:$USERNAME" .
+sudo -u "$USERNAME" makepkg -sri
 
-cd /home/$USERNAME
+cd /home/"$USERNAME"
 rm -rf yay yay.tar.gz
 
-changed_makepkg=$(cat /etc/makepkg.conf | sed "s/PKGEXT='.pkg.tar.zx'/PKGEXT='.pkg.tar'/")
+changed_makepkg=$(sed "s/PKGEXT='.pkg.tar.zx'/PKGEXT='.pkg.tar'/" /etc/makepkg.conf)
 echo "$changed_makepkg" >/etc/makepkg.conf

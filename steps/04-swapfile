@@ -12,7 +12,7 @@ if [[ -f /swapfile ]]; then
 fi
 
 total_mem_kib=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-swapfile_size=$(( $total_mem_kib / 1024 ))
+swapfile_size=$(( total_mem_kib / 1024 ))
 
 echo "Creating a swapfile of size $swapfile_size at /swapfile."
 
@@ -21,6 +21,6 @@ chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
 
-if [[ $(grep /swapfile /etc/fstab | wc -l) -eq 0 ]]; then
+if ! grep -q /swapfile /etc/fstab; then
   echo "/swapfile	none	swap	defaults	0	0" >>/etc/fstab
 fi

@@ -12,7 +12,7 @@ while true; do
   ls /usr/share/zoneinfo
   echo
   echo -n "Select your region: "
-  read region
+  read -r region
   if [[ -f "/usr/share/zoneinfo/$region" ]] || [[ -d "/usr/share/zoneinfo/$region" ]]; then
     break
   fi
@@ -20,22 +20,22 @@ while true; do
 done
 
 if [[ -f "/usr/share/zoneinfo/$region" ]]; then
-  ln -sf /usr/share/zoneinfo/$region /etc/localtime
+  ln -sf /usr/share/zoneinfo/"$region" /etc/localtime
   echo "Timezone set to $region"
 else
   while true; do
     echo
-    ls /usr/share/zoneinfo/$region
+    ls /usr/share/zoneinfo/"$region"
     echo
     echo -n "Select your city: "
-    read city
+    read -r city
     if [[ -f "/usr/share/zoneinfo/$region/$city" ]]; then
       break
     fi
     echo "Invalid input, try again."
   done
 
-  ln -sf /usr/share/zoneinfo/$region/$city /etc/localtime
+  ln -sf /usr/share/zoneinfo/"$region"/"$city" /etc/localtime
   echo "Timezone set to $region/$city"
 fi
 

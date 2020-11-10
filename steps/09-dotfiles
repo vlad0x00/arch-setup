@@ -5,9 +5,9 @@ set -e
 echo "Setting up dotfiles."
 echo
 
-cd /home/$USERNAME
+cd /home/"$USERNAME"
 rm -rf .dotfiles
 
-sudo -u $USERNAME git clone https://github.com/schutzekatze/.dotfiles
+sudo -u "$USERNAME" git clone https://github.com/schutzekatze/.dotfiles
 cd .dotfiles
-sudo -u $USERNAME ./setup
+sudo -u "$USERNAME" ./setup
