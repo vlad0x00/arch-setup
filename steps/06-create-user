@@ -25,6 +25,7 @@ passwd "$USERNAME"
 echo "Making home dirs."
 
 cd /home/"$USERNAME"
+sudo -u "$USERNAME" mkdir -p downloads
 sudo -u "$USERNAME" mkdir -p projects
 sudo -u "$USERNAME" mkdir -p random
 sudo -u "$USERNAME" mkdir -p tools

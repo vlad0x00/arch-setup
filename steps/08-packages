@@ -5,13 +5,13 @@ set -e
 echo "Setting up user packages."
 echo
 
-BASIC_PACKAGES=( jdk14-openjdk openjdk14-doc openjdk14-src java-openjfx java-openjfx-doc java-openjfx-src openssh python python-pip acpi sysstat mesa tlp )
+BASIC_PACKAGES=( jdk14-openjdk openjdk14-doc openjdk14-src java-openjfx java-openjfx-doc java-openjfx-src openssh python python-pip r acpi sysstat mesa tlp )
 
-MEDIA_PACKAGES=( pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-rtp pulseaudio-zeroconf pavucontrol also-cardprofiles alsa-firmware alsa-lib alsa-oss  alsa-plugins alsa-topology-conf alsa-ucm-conf alsa-utils ffmpeg )
+MEDIA_PACKAGES=( pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-rtp pulseaudio-zeroconf pavucontrol also-card-profiles alsa-firmware alsa-lib alsa-oss  alsa-plugins alsa-topology-conf alsa-ucm-conf alsa-utils ffmpeg )
 
-INTERFACE_PACKAGES=( i3-gaps compton dmenu noto-fonts noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys xclip zsh zsh-completions python-pywal redshift xfce4-terminal xfce4-screenshooter ttf-ubuntu-font-family nautilus )
+INTERFACE_PACKAGES=( i3-gaps compton dmenu ttf-font-awesome noto-fonts noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys xclip zsh zsh-completions python-pywal redshift xfce4-terminal xfce4-screenshooter ttf-ubuntu-font-family nautilus )
 
-USEFUL_SOFTWARE=( gedit krita inkscape imagemagick vlc firefox chromium signal-desktop telegram-desktop discord pandoc texlive-most texlive-lang biber rclone htop vnstat keepassxc tree shotwell feh wget cowsay lolcat sl nmap neovim asciiqiarium audacity boost boost-libs tbb pigz clang rustup code opencv meson ninja graphviz stellarium tor torbrowser-launcher )
+USEFUL_SOFTWARE=( gedit krita inkscape imagemagick vlc firefox chromium signal-desktop telegram-desktop discord pandoc texlive-most texlive-lang biber rclone htop vnstat keepassxc tree shotwell feh wget cowsay lolcat sl nmap neovim asciiquarium audacity boost boost-libs tbb pigz clang rustup code opencv meson ninja graphviz stellarium tor torbrowser-launcher )
 
 pacman -S base-devel "${BASIC_PACKAGES[@]}" "${MEDIA_PACKAGES[@]}" "${INTERFACE_PACKAGES[@]}" "${USEFUL_SOFTWARE[@]}"
 
@@ -40,7 +40,7 @@ fi
 
 echo
 echo "Installing AUR packages."
-sudo -u "$USERNAME" yay -S yabar-git ttf-font-awesome-5 oh-my-zsh-git
+sudo -u "$USERNAME" yay -S yabar-git oh-my-zsh-git protonvpn-cli-ng
 
 echo
 echo "Changing default shell to zsh."
@@ -48,4 +48,4 @@ sudo -u "$USERNAME" chsh -s /usr/bin/zsh
 
 echo
 echo "Installing pip packages."
-pip install i3ipc protonvpn-cli
+pip install i3ipc

@@ -5,11 +5,13 @@ set -e
 echo "Setting up bootloader."
 echo
 
-bootloader_dev=$(df -h /boot | head -n 2 | tail -n 1 | awk '{print $1}')
-os_dev=$(df -h / | head -n 2 | tail -n 1 | awk '{print $1}')
+bootloader_root=$(df -h /boot | head -n 2 | tail -n 1 | awk '{print $1}')
+os_root=$(df -h / | head -n 2 | tail -n 1 | awk '{print $1}')
+os_dev=$(cryptsetup status cryptroot | grep device | awk '{ print $2 }')
+os_dev_uuid=$(lsblk -f | grep "$os_dev" -B1 | head -n1 | awk '{ print $4 }' | tr '\n' ' ' | tr -d ' ')
 
-echo "Bootloader device at $bootloader_dev"
-echo "OS device at $os_dev"
+echo "Bootloader at $bootloader_root"
+echo "OS at $os_root"
 echo
 
 echo "Installing bootloader."
@@ -42,8 +44,6 @@ if [ -f /boot/amd-ucode.img ]; then
     echo "initrd /amd-ucode.img" >>/boot/loader/entries/arch.conf
 fi
 echo "initrd /initramfs-linux.img
-options root=$os_dev rw" >>/boot/loader/entries/arch.conf
+options cryptdevice=UUID=$os_dev_uuid:cryptroot root=$os_root rw" >>/boot/loader/entries/arch.conf
 echo "Arch conf file content:"
 cat /boot/loader/entries/arch.conf
-
-mkinitcpio -p linux
