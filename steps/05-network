@@ -5,12 +5,11 @@ set -e
 echo "Setting up network."
 echo
 
-pacman -S iw iwd dhcp dhcpcd wpa_supplicant
+pacman -S iw iwd netctl dhcp dhcpcd wpa_supplicant
 
 wireless_interface=$(basename $(find /sys/class/net/ -iname "*wl*" | head -n1))
-systemctl start iwd
-systemctl enable iwd
 systemctl enable "dhcpcd@$wireless_interface"
+systemctl enable "netctl-auto@$wireless_interface"
 
 hostname=$(cat /etc/hostname)
 echo "127.0.0.1	localhost
