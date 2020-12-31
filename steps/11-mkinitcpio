@@ -5,15 +5,7 @@ set -e
 echo "Adjusting initcpio"
 echo
 
-eval "$(cat /etc/mkinitcpio.conf | grep '^HOOKS=')"
-new_hooks=(base udev autodetect keyboard consolefont modconf block encrypt filesystems fsck)
+new_hooks=$(sed 's~^HOOKS=(.*)$~HOOKS=(base udev autodetect keyboard modconf block encrypt filesystems fsck)~' /etc/mkinitcpio.conf)
+echo "$new_hooks" >/etc/mkinitcpio.conf
 
-diff_hooks=( $(echo ${HOOKS[@]} ${new_hooks[@]} | tr ' ' '\n' | sort | uniq -u) )
-
-if [[ ${#diff_hooks[@]} -eq 1 ]]; then
-  mkinitcpio -P
-else
-  echo "Diff hooks: $diff_hooks"
-  echo "The step requires manual intervention, halting..."
-  exit 1
-fi
+mkinitcpio -P

@@ -8,7 +8,7 @@ echo
 bootloader_root=$(df -h /boot | head -n 2 | tail -n 1 | awk '{print $1}')
 os_root=$(df -h / | head -n 2 | tail -n 1 | awk '{print $1}')
 os_dev=$(cryptsetup status cryptroot | grep device | awk '{ print $2 }')
-os_dev_uuid=$(lsblk -f | grep "$os_dev" -B1 | head -n1 | awk '{ print $4 }' | tr '\n' ' ' | tr -d ' ')
+os_dev_uuid=$(blkid | grep "$os_dev" | awk '{ print $2 }' | awk -F'=' '{ print $2 }' | awk -F'"' '{ print $2 }')
 
 echo "Bootloader at $bootloader_root"
 echo "OS at $os_root"
