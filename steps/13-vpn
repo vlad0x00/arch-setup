@@ -6,7 +6,23 @@ echo "Setting up VPN"
 echo
 
 function enable_vpn() {
+  PREV_SUDO_USER="$SUDO_USER"
+  PREV_SUDO_UID="$SUDO_UID"
+  PREV_SUDO_GID="$SUDO_GID"
+  PREV_PWD=$(pwd)
+  
+  export SUDO_USER="$USERNAME"
+  SUDO_UID=$(sudo -u "$USERNAME" id -u)
+  SUDO_GID=$(sudo -u "$USERNAME" id -g)
+  export SUDO_UID
+  export SUDO_GID
+  cd /home/"$USERNAME"
   protonvpn init
+ 
+  cd "$PREV_PWD"
+  export SUDO_USER="$PREV_SUDO_USER"
+  export SUDO_UID="$PREV_SUDO_UID"
+  export SUDO_GID="$PREV_SUDO_GID"
 
   echo "[Unit]
 Description=Turn on VPN once online
