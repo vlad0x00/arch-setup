@@ -9,7 +9,7 @@ BASIC_PACKAGES=( jdk14-openjdk openjdk14-doc openjdk14-src java-openjfx java-ope
 
 MEDIA_PACKAGES=( pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-rtp pulseaudio-zeroconf pavucontrol alsa-card-profiles alsa-firmware alsa-lib alsa-oss  alsa-plugins alsa-topology-conf alsa-ucm-conf alsa-utils ffmpeg )
 
-INTERFACE_PACKAGES=( i3-gaps compton dmenu ttf-dejavu ttf-font-awesome noto-fonts noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys xclip zsh zsh-completions python-pywal redshift xfce4-terminal xfce4-screenshooter ttf-ubuntu-font-family nautilus )
+INTERFACE_PACKAGES=( i3-gaps compton dmenu ttf-dejavu ttf-font-awesome noto-fonts noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput xbindkeys xclip zsh zsh-completions python-pywal redshift xfce4-terminal xfce4-screenshooter ttf-ubuntu-font-family nautilus gvfs-mtp )
 
 USEFUL_SOFTWARE=( gedit krita inkscape imagemagick vlc firefox chromium signal-desktop telegram-desktop discord pandoc pandoc-citeproc pandoc-crossref texlive-most texlive-lang biber rclone htop vnstat keepassxc tree shotwell feh wget cowsay lolcat sl nmap neovim asciiquarium audacity boost boost-libs tbb pigz clang rustup code opencv meson ninja graphviz stellarium tor torbrowser-launcher )
 
