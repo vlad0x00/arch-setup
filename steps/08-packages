@@ -5,7 +5,7 @@ set -e
 echo "Setting up user packages."
 echo
 
-BASIC_PACKAGES=( jdk14-openjdk openjdk14-doc openjdk14-src java-openjfx java-openjfx-doc java-openjfx-src openssh python python-pip r acpi sysstat mesa tlp )
+BASIC_PACKAGES=( jdk-openjdk openjdk-doc openjdk-src java-openjfx java-openjfx-doc java-openjfx-src openssh python python-pip r acpi sysstat mesa tlp )
 
 MEDIA_PACKAGES=( pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-rtp pulseaudio-zeroconf pavucontrol alsa-card-profiles alsa-firmware alsa-lib alsa-oss  alsa-plugins alsa-topology-conf alsa-ucm-conf alsa-utils ffmpeg )
 
