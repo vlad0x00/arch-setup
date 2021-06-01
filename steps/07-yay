@@ -14,7 +14,7 @@ wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
 tar zxf yay.tar.gz
 cd yay
 chown -R "$USERNAME:$USERNAME" .
-sudo -u "$USERNAME" makepkg -sri
+sudo -u "$USERNAME" makepkg -si
 
 cd /home/"$USERNAME"
 rm -rf yay yay.tar.gz
