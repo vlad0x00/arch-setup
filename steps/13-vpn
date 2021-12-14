@@ -47,7 +47,9 @@ WantedBy=multi-user.target" >/etc/systemd/system/vpn@.service
 }
 
 function disable_vpn() {
+  set +e
   systemctl disable vpn@fast.service 2>/dev/null
+  set -e
   rm -f /etc/systemd/system/vpn@.service
 }
 
