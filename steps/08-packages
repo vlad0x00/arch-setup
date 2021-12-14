@@ -44,7 +44,3 @@ sudo -u "$USERNAME" yay -S yabar-git oh-my-zsh-git protonvpn-cli-ng
 echo
 echo "Changing default shell to zsh."
 sudo -u "$USERNAME" chsh -s /usr/bin/zsh
-
-echo
-echo "Installing pip packages."
-pip install i3ipc
