@@ -35,8 +35,9 @@ echo
 
 echo "default archlinux" >/boot/loader/loader.conf
 
-echo "title Arch Linux
 entry=/boot/loader/entries/archlinux.conf
+
+echo "title Arch Linux
 linux /vmlinuz-linux" >"$entry"
 if [ -f /boot/intel-ucode.img ]; then
     echo "initrd /intel-ucode.img" >>"$entry"
