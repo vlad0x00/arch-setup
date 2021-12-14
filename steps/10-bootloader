@@ -33,17 +33,18 @@ echo "Hook file content:"
 cat /etc/pacman.d/hooks/systemd-boot.hook
 echo
 
-echo "default arch" >/boot/loader/loader.conf
+echo "default archlinux" >/boot/loader/loader.conf
 
 echo "title Arch Linux
-linux /vmlinuz-linux" >/boot/loader/entries/arch.conf
+entry=/boot/loader/entries/archlinux.conf
+linux /vmlinuz-linux" >"$entry"
 if [ -f /boot/intel-ucode.img ]; then
-    echo "initrd /intel-ucode.img" >>/boot/loader/entries/arch.conf
+    echo "initrd /intel-ucode.img" >>"$entry"
 fi
 if [ -f /boot/amd-ucode.img ]; then
-    echo "initrd /amd-ucode.img" >>/boot/loader/entries/arch.conf
+    echo "initrd /amd-ucode.img" >>"$entry"
 fi
 echo "initrd /initramfs-linux.img
-options cryptdevice=UUID=$os_dev_uuid:cryptroot root=$os_root rw" >>/boot/loader/entries/arch.conf
+options cryptdevice=UUID=$os_dev_uuid:cryptroot root=$os_root rw" >>"$entry"
 echo "Arch conf file content:"
-cat /boot/loader/entries/arch.conf
+cat "$entry"
