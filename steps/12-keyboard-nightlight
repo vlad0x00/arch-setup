@@ -71,7 +71,9 @@ WantedBy=timers.target" >/etc/systemd/system/keyboard-nightlight.timer
 }
 
 function disable_nightlight() {
+  set +e
   systemctl disable keyboard-nightlight.timer 2>/dev/null
+  set -e
 
   rm -f /usr/local/bin/keyboard-nightlight
   rm -f /usr/local/bin/keyboard-backlight-on
