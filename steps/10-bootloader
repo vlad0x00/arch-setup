@@ -34,7 +34,6 @@ cat /etc/pacman.d/hooks/systemd-boot.hook
 echo
 
 echo "default archlinux" >/boot/loader/loader.conf
-
 entry=/boot/loader/entries/archlinux.conf
 
 echo "title Arch Linux
@@ -47,5 +46,6 @@ if [ -f /boot/amd-ucode.img ]; then
 fi
 echo "initrd /initramfs-linux.img
 options cryptdevice=UUID=$os_dev_uuid:cryptroot root=$os_root rw lsm=lockdown,yama,apparmor,bpf" >>"$entry"
+
 echo "Arch conf file content:"
 cat "$entry"

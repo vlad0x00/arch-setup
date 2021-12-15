@@ -19,5 +19,4 @@ sudo -u "$USERNAME" makepkg -si
 cd /home/"$USERNAME"
 rm -rf yay yay.tar.gz
 
-changed_makepkg=$(sed "s/PKGEXT='.pkg.tar.zx'/PKGEXT='.pkg.tar'/" /etc/makepkg.conf)
-echo "$changed_makepkg" >/etc/makepkg.conf
+sed -i "s/PKGEXT='.pkg.tar.zx'/PKGEXT='.pkg.tar'/" /etc/makepkg.conf

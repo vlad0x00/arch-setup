@@ -11,12 +11,24 @@ if [[ -f /swapfile ]]; then
   rm -f /swapfile
 fi
 
-total_mem_kib=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-swapfile_size=$(( total_mem_kib / 1024 ))
+while true; do
+  echo -n "How many MiB should the swapfile be: "
+  read swapsize
+  echo "Are you sure you want to make a swapfile of size ${swapsize} MiB?"
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes) breakloop=1; break;;
+      No) breakloop=0; break;;
+    esac
+  done
+  if [[ breakloop -eq 1 ]]; then
+    break
+  fi
+done
 
-echo "Creating a swapfile of size $swapfile_size at /swapfile."
+echo "Creating a $swapsize MiB swapfile at /swapfile."
 
-dd if=/dev/zero of=/swapfile bs=1M count=$swapfile_size status=progress
+dd if=/dev/zero of=/swapfile bs=1M count=$swapsize status=progress
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile

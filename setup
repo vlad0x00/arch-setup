@@ -48,4 +48,4 @@ cd /home/$USERNAME
 rm -rf $SETUP_DIR
 
 echo "Setup finished."
-echo "Things missing: graphics drivers, place your own wallpapers in .wallpapers"
+echo "Things missing: graphics and other drivers, your own wallpapers in .wallpapers"

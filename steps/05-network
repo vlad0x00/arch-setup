@@ -5,19 +5,23 @@ set -e
 echo "Setting up network."
 echo
 
-pacman -S iw iwd netctl dhcp dhcpcd wpa_supplicant
+pacman -S iwd
 
-wireless_interface=$(basename $(find /sys/class/net/ -iname "*wl*" | head -n1))
-systemctl enable "dhcpcd@$wireless_interface"
-systemctl enable "netctl-auto@$wireless_interface"
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
 
 hostname=$(cat /etc/hostname)
 echo "127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	$hostname.localdomain	$hostname" >/etc/hosts
 
-changed_default_link=$(sed 's~MACAddressPolicy=.*~MACAddressPolicy=random~' /usr/lib/systemd/network/99-default.link)
-echo "$changed_default_link" >/usr/lib/systemd/network/99-default.link
+sed -i 's~MACAddressPolicy=.*~MACAddressPolicy=random~' /usr/lib/systemd/network/99-default.link
+
+echo "[Match]
+Name=w*
+
+[Network]
+DHCP=yes" >/etc/systemd/network/25-wireless.network
 
 echo
 echo "/etc/hosts content set to:"

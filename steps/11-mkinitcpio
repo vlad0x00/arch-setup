@@ -5,7 +5,6 @@ set -e
 echo "Adjusting initcpio"
 echo
 
-new_hooks=$(sed 's~^HOOKS=(.*)$~HOOKS=(base udev autodetect keyboard modconf block ykfde encrypt filesystems fsck)~' /etc/mkinitcpio.conf)
-echo "$new_hooks" >/etc/mkinitcpio.conf
+sed -i 's~^HOOKS=(.*)$~HOOKS=(base udev autodetect keyboard modconf block ykfde encrypt filesystems fsck)~' /etc/mkinitcpio.conf
 
 mkinitcpio -P
