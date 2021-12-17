@@ -45,7 +45,7 @@ if [ -f /boot/amd-ucode.img ]; then
     echo "initrd /amd-ucode.img" >>"$entry"
 fi
 echo "initrd /initramfs-linux.img
-options cryptdevice=UUID=$os_dev_uuid:cryptroot root=$os_root rw lsm=lockdown,yama,apparmor,bpf" >>"$entry"
+options cryptdevice=UUID=$os_dev_uuid:cryptroot root=$os_root rw lsm=lockdown,yama,apparmor,bpf acpi_os_name=Linux acpi_osi=" >>"$entry"
 
 echo "Arch conf file content:"
 cat "$entry"
