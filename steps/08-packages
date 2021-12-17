@@ -5,7 +5,7 @@ set -e
 echo "Setting up user packages."
 echo
 
-BASIC_PACKAGES=( openssh python python-pip r acpi sysstat mesa )
+BASIC_PACKAGES=( openssh python python-pip r acpi sysstat mesa tlp )
 
 MEDIA_PACKAGES=( pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-rtp pulseaudio-zeroconf pavucontrol alsa-card-profiles alsa-firmware alsa-lib alsa-oss  alsa-plugins alsa-topology-conf alsa-ucm-conf alsa-utils pamixer ffmpeg )
 
@@ -14,6 +14,8 @@ INTERFACE_PACKAGES=( i3-gaps python-i3ipc picom dmenu ttf-dejavu ttf-font-awesom
 USEFUL_SOFTWARE=( gedit krita inkscape imagemagick vlc firefox chromium signal-desktop telegram-desktop discord texlive-most texlive-lang biber rclone htop vnstat keepassxc shotwell feh wget nmap boost boost-libs tbb clang rustup code tor torbrowser-launcher )
 
 pacman -S "${BASIC_PACKAGES[@]}" "${MEDIA_PACKAGES[@]}" "${INTERFACE_PACKAGES[@]}" "${USEFUL_SOFTWARE[@]}"
+
+systemctl enable tlp
 
 if ! pacman -Q | grep -q 'intel-ucode\|amd-ucode'; then
   echo
