@@ -5,7 +5,7 @@ set -e
 echo "Setting up dotfiles."
 echo
 
-cd /home/"$USERNAME"/projects
+cd /home/"$USERNAME"
 rm -rf .dotfiles
 
 sudo -u "$USERNAME" git clone https://github.com/schutzekatze/.dotfiles
