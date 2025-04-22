@@ -9,7 +9,7 @@ BASIC_PACKAGES=( openssh python python-pip r acpi sysstat mesa tlp )
 
 MEDIA_PACKAGES=( pipewire pipewire-alsa pipewire-audio pipewire-pulse pavucontrol alsa-card-profiles alsa-firmware alsa-lib alsa-oss  alsa-plugins alsa-topology-conf alsa-ucm-conf alsa-utils pamixer ffmpeg )
 
-INTERFACE_PACKAGES=( bemenu otf-font-awesome ttf-dejavu noto-fonts noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput zsh zsh-completions python-pywal redshift xfce4-terminal xfce4-screenshooter ttf-ubuntu-font-family nautilus gvfs-mtp wl-clipboard  )
+INTERFACE_PACKAGES=( bemenu otf-font-awesome ttf-dejavu noto-fonts noto-fonts noto-fonts-cjk noto-fonts-extra noto-fonts-emoji xorg xorg-xinit xorg-server xorg-server-devel xorg-xrandr xorg-xinput zsh zsh-completions python-pywal redshift xfce4-terminal xfce4-screenshooter ttf-ubuntu-font-family nautilus gvfs-mtp wl-clipboard xdg-user-dirs )
 
 USEFUL_SOFTWARE=( gedit krita inkscape imagemagick vlc firefox chromium signal-desktop telegram-desktop discord texlive-most texlive-lang biber rclone htop vnstat keepassxc shotwell feh wget nmap boost boost-libs tbb clang rustup code tor torbrowser-launcher )
 
